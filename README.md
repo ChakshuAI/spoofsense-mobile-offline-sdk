@@ -104,7 +104,7 @@ dependencies {
    . . .
    implementation 'org.pytorch:pytorch_android:1.8.0'
    implementation 'org.pytorch:pytorch_android_torchvision:1.8.0'
-   implementation 'com.chakshu.SpoofSenseSDK:app:v0.2.2'
+   implementation 'com.chakshu.SpoofSenseSDK:app:v0.2.3'
    . . .
 }
 ```
@@ -147,6 +147,8 @@ int a = spoofSenseInterface.LoadModel(getApplicationContext());
 #### Activity, callback reference, bitmap and rect bounding box. *Rect* should be used for the bounding box and the method should be called only if the 
 #### model is loaded successfully.
 
+Rect refers to the cropping coordinates required to crop the face from the image. Rect has 4 attributes, namely Rect.top, Rect.bottom, Rect.left, Rect.right
+
 ```java
 private Rect bb_box;
 . . .
@@ -177,7 +179,7 @@ The parameters to the method are:
 - **errorMsg:**	string message to indicate the status of execution. Following are the different messages provided:
 
   - ‘’Success’’: This indicates that the pipeline was executed successfully.
-  - ‘’Minimum face check Failed”: This indicates that the cropped Bitmap height and width is too small. The height and width of the cropped Bitmap should be at least 150.
+  - ‘’Minimum face check Failed”: This indicates that the cropped Bitmap height and width is too small. The height of the cropped Bitmap should be greater than 150 and the width of the cropped Bitmap should be greater than 150.
   - “Bitmap or Rect empty”: This indicates that the Bitmap or Rect is either empty or NULL.
   - “Error during image analysis”: This indicates that the PyTorch image analysis functionality failed.
 
